@@ -13,10 +13,10 @@ for key in too_small_keys:
     car_brand_dict['andere'] = car_brand_dict[key]
     del car_brand_dict[key]
 
-value, label = car_brand_dict.values(), car_brand_dict.keys()
+value, label = car_brand_dict.values(), [x.capitalize() for x in list(car_brand_dict.keys())]
 
-figure, axis = plt.subplots()
-axis.tick_params(rotation=-90, labelsize=8)
+figure, axis = plt.subplots(figsize=(16, 8))
+axis.tick_params(rotation=-90, labelsize=12)
 axis.bar(label, value)
 plt.subplots_adjust(bottom=0.2)
 plt.show()
