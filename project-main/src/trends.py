@@ -56,3 +56,5 @@ if __name__ == '__main__':
         csv_reader = {x[0]: x[1:] for x in csv_reader}
 
         get_trend_plot('brand')
+        get_trend_plot('gearbox')
+        get_trend_plot('fuel')
