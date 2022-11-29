@@ -44,7 +44,6 @@ def get_trend_plot(trend_name):
     plt.show()
 
 
-
 if __name__ == '__main__':
     # load data from ./archive/postal.csv
     with open('./archive/postal.csv') as csv_handler:
@@ -58,4 +57,5 @@ if __name__ == '__main__':
 
         for el in csv_reader:
             print(el, len(csv_reader[el]))
-    get_trend_plot('brand')
+
+        get_trend_plot('brand')
