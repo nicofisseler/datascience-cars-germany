@@ -33,8 +33,6 @@ if __name__ == '__main__':
         # calculate time difference between ad_created and last_seen
         for el in vehicle_type_dict:
             for i in range(len(vehicle_type_dict[el])):
-                # convert timestring to datetime object
-
                 vehicle_type_dict[el][i] = (
                         datetime.strptime(vehicle_type_dict[el][i][1], '%Y-%m-%d') - datetime.strptime(
                     vehicle_type_dict[el][i][0], '%Y-%m-%d')).days
@@ -44,13 +42,10 @@ if __name__ == '__main__':
 
         plt.bar(np.arange(len(vehicle_type_dict)), [sum(x[1]) / len(x[1]) for x in vehicle_type_dict])
         plt.xticks(np.arange(len(vehicle_type_dict)), [x[0] for x in vehicle_type_dict], rotation=90)
-        # expand bottom
         plt.subplots_adjust(bottom=0.2)
         # write exact value on top of each bar
         for i, v in enumerate([sum(x[1]) / len(x[1]) for x in vehicle_type_dict]):
             plt.text(i - 0.25, v + 0.1, str(round(v, 2)), color='black')
-        # start y axis at 4
         plt.ylim(8)
-        # label y axis as 'differenz in tagen'
         plt.ylabel('differenz in tagen')
         plt.show()
