@@ -11,8 +11,6 @@ def get_fastets_selling(category, number_of_bars, start=0):
             len(element) > 1 and len(csv_reader['vehicle_type'][idx]) > 1 and len(csv_reader['fuel'][idx]) > 1 and len(
                 csv_reader['gearbox'][idx]) > 1]
 
-    print(vehicle_type_dict)
-
     # create a list of tuples
     ad_created_last_seen = list(
         zip(keys, csv_reader['ad_created'], csv_reader['last_seen']))
