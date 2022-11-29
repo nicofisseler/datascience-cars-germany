@@ -38,8 +38,8 @@ def get_trend_plot(trend_name):
     # plot every element in trend_dict as a curve
     for el in trend_dict:
         plt.plot(*zip(*trend_dict[el]), label=el)
-    plt.legend()
-    # rotate x axis labels
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
+    plt.subplots_adjust(right=0.7)
     plt.xticks(rotation=90)
     plt.show()
 
@@ -54,8 +54,5 @@ if __name__ == '__main__':
 
         # create dict from list with first element as key and the rest as value
         csv_reader = {x[0]: x[1:] for x in csv_reader}
-
-        for el in csv_reader:
-            print(el, len(csv_reader[el]))
 
         get_trend_plot('brand')
