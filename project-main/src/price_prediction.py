@@ -114,4 +114,4 @@ if __name__ == '__main__':
         # create dict from list with first element as key and the rest as value
         csv_reader = {x[0]: x[1:] for x in csv_reader}
 
-        print(calculate_price('audi', 'kombi', 2008, 100000, 'benzin', 'manuell', 200))
+        print(calculate_price('bmw', 'suv', 2005, 102348, 'diesel', 'automatik', 231))
