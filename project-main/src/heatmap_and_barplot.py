@@ -18,8 +18,7 @@ if __name__ == '__main__':
 
         nomi = pgeocode.Nominatim('de')
 
-        # get postal codes and make sure they are 5 characters long
-        postal_codes = [str(x).zfill(5) for x in csv_reader['postal_code']]
+        # get a tuple of latitude and longitude for every postal code and the price
 
         # group postal codes by first two characters
         postal_codes = {x[:2]: [] for x in postal_codes}
