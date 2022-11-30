@@ -8,19 +8,35 @@ from folium.plugins import HeatMap
 if __name__ == '__main__':
     # load data from ./archive/postal.csv
     with open('./archive/postal.csv') as csv_handler:
-        csv_reader = list(csv.reader(csv_handler))[1:]
+        csv_reader = list(csv.reader(csv_handler))
+
+        # rotate csv_reader clockwise
+        csv_reader = list(zip(*csv_reader))[1:]
+
+        # create dict from list with first element as key and the rest as value
+        csv_reader = {x[0]: x[1:] for x in csv_reader}
 
         nomi = pgeocode.Nominatim('de')
 
         # get postal codes and make sure they are 5 characters long
-        postal_codes = [str(x[16]).zfill(5) for x in csv_reader]
+        postal_codes = [str(x).zfill(5) for x in csv_reader['postal_code']]
+
+        # group postal codes by first two characters
+        postal_codes = {x[:2]: [] for x in postal_codes}
+        for el in postal_codes:
+            for idx, y in enumerate(csv_reader['postal_code']):
+                if str(y).zfill(5)[:2] == el:
+                    postal_codes[el].append(str(y).zfill(5))
+        # sort postal codes
+        postal_codes = sorted(postal_codes.items(), key=lambda x: x[0])
+        # sort values of postal codes
+        postal_codes = [(x[0], sorted(x[1])) for x in postal_codes]
+
+        print(postal_codes)
+
+        """
         # group postal codes by district
-        postal_codes_by_district = {}
-        for postal_code in postal_codes:
-            district = str(nomi.query_postal_code(postal_code).community_name)
-            if district not in postal_codes_by_district:
-                postal_codes_by_district[district] = []
-            postal_codes_by_district[district].append(postal_code)
+        
 
         # convert postal codes to coordinates using pgeocode
         postal_codes_coordinates = nomi.query_postal_code(postal_codes)
@@ -49,4 +65,4 @@ if __name__ == '__main__':
         plt.subplots_adjust(left=0.3)
         # set title
         plt.title("10 Bundesländer in denen am meisten Autos verkauft wurden", fontsize=40, fontweight="bold")
-        plt.show()
+        plt.show()"""
